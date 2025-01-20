@@ -4,7 +4,18 @@ sources:
   - name: jaffle_shop
     database: dbt-tutorial
     schema: jaffle_shop
+    # Including in the schema level
+    freshness: 
+      warn_after: {count: 24, period: hour}
+      error_after: {count: 1, period: day}
+    loaded_at_field: _etl_loaded_at # This is the name of the field with timestamp value in the table 
     tables:
       - name: orders
+        # freshness: 
+        #   warn_after: {count: 24, period: hour}
+        #   error_after: {count: 1, period: day}
+        # loaded_at_field: _etl_loaded_at # This is the name of the field with timestamp value in the table 
       - name: customers
+        freshness: null # Since there's no timestamp field in this table, we need to apply this
+        
   
