@@ -15,7 +15,24 @@ sources:
         #   warn_after: {count: 24, period: hour}
         #   error_after: {count: 1, period: day}
         # loaded_at_field: _etl_loaded_at # This is the name of the field with timestamp value in the table 
+        columns:
+          - name: id
+            tests:
+              - unique
+              - not_null
+          - name: status
+            tests:
+              - accepted_values:
+                  values: ['shipped', 'completed', 'return_pending', 'returned', 'placed' ]
       - name: customers
         freshness: null # Since there's no timestamp field in this table, we need to apply this
-        
+        columns:
+          - name: id
+            tests:
+              - unique
+              - not_null
+
+
+
+                  
   
