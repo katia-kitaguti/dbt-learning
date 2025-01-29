@@ -24,6 +24,11 @@ sources:
             tests:
               - accepted_values:
                   values: ['shipped', 'completed', 'return_pending', 'returned', 'placed' ]
+          - name: customer_id
+            tests:
+            - relationships:
+                to: ref('stg_jaffle_shop__customers')
+                field: customer_id
       - name: customers
         freshness: null # Since there's no timestamp field in this table, we need to apply this
         columns:
