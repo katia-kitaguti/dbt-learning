@@ -8,4 +8,4 @@
 | return_pending | Customer has indicated they would like to return this item |
 | returned       | Item has been returned                                     |
 
-{% enddocs} 
+{% enddocs%} 
