@@ -6,9 +6,33 @@ sources:
     schema: stripe
     tables:
       - name: payment
+        description: A clone of Stripe application database
         loaded_at_field: _batched_at
         freshness:
           warn_after: {count: 12, period: hour}
           error_after: {count: 24, period: hour}
         
-  
+models:
+  - name: stg_stripe_payments
+    description: Payment data.
+    columns:  
+      - name: payment_id
+        description: Primary key of customers payment
+      - name: order_id
+        description: Order id related to the payment
+      - name : payment_method
+        description: Payment method
+        tests:  
+        - accepted_values:
+              values:
+                - "success"
+                - "fail"
+        - relationships:
+              to: ref('stg_orders')
+              field: order_id
+      - name: status
+        description: Payment status
+      - name: amount
+        description: Payment amount in USD
+      - name: created_at
+        description: Invoice's created date
