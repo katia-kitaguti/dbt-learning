@@ -2,6 +2,7 @@ version: 2
 
 sources:
   - name: jaffle_shop
+    description: A clone of a Postgres application database
     database: dbt-tutorial
     schema: jaffle_shop
     # Including in the schema level
@@ -11,12 +12,14 @@ sources:
     loaded_at_field: _etl_loaded_at # This is the name of the field with timestamp value in the table 
     tables:
       - name: orders
+        description: Raw orders data
         # freshness: 
         #   warn_after: {count: 24, period: hour}
         #   error_after: {count: 1, period: day}
         # loaded_at_field: _etl_loaded_at # This is the name of the field with timestamp value in the table 
         columns:
           - name: id
+            description: primary key for customers data
             tests:
               - unique
               - not_null
@@ -30,6 +33,7 @@ sources:
                 to: ref('stg_jaffle_shop__customers')
                 field: customer_id
       - name: customers
+        description: Raw customers data
         freshness: null # Since there's no timestamp field in this table, we need to apply this
         columns:
           - name: id
